@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as builder
+FROM ubuntu:22.04 AS builder
 ARG VERUS_VERSION=1.2.3-7
 WORKDIR /app
 RUN apt update && \
