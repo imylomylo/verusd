@@ -9,3 +9,4 @@ It gets built to an image called komodefi/verusd:0.1
 
 It can then be used in docker-compose.yaml files.
 
+It requires zcash params from the host which can be loaded as a volume at runtime and read-only.
