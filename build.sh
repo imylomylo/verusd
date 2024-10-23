@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t komodefi/verusd:0.1 .
+docker build -t verustrading/verusd:0.1 .
