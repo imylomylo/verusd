@@ -10,6 +10,7 @@ services:
     # pbaas change (data_dir target only)
     volumes:
       - ./data_dir:/root/.verustest/pbaas/f42319bc427f4633d987bae4ebfdaeda41a56517
+      - ./data_dir/daemon_config.conf:/root/.verustest/pbaas/f42319bc427f4633d987bae4ebfdaeda41a56517/f42319bc427f4633d987bae4ebfdaeda41a56517.conf
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
     networks:
       vrsctest_net:
