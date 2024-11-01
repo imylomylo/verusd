@@ -1,0 +1,29 @@
+services:
+  verusd:
+    # pbaas change
+    hostname: vrsctest_chips777
+    # pbaas change
+    container_name: vrsctest_chips777
+    image: verustrading/verusd:0.1
+    # pbaas change
+    command: verusd -chain=chips777 -testnet &
+    # pbaas change (data_dir target only)
+    volumes:
+      - ./data_dir:/root/.verustest/pbaas/f42319bc427f4633d987bae4ebfdaeda41a56517
+      - /home/${USER}/.zcash-params:/root/.zcash-params:ro
+    networks:
+      vrsctest_net:
+        ipv4_address: ${VERUSD_IPV4}
+    logging:
+      driver: "json-file"
+    stop_grace_period: 2m
+
+networks:
+  vrsctest_net:
+    name: vrsctest_vrsctest_net
+    external: true
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_VRSCTEST_NET_NETWORK_SUBNET}
+
