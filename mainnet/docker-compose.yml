@@ -3,14 +3,16 @@ services:
     hostname: verusd_vrsc
     container_name: verusd_vrsc
     image: verustrading/verusd:0.1
-    command: verusd &
-    #command: verusd -bootstrap &
+      #command: verusd &
+    command: verusd -bootstrap &
     volumes:
       - ./data_dir:/root/.komodo/VRSC
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
     networks:
       vrsc_mainnet:
         ipv4_address: ${VERUSD_IPV4}
+    ports:
+      - "127.0.0.1:27496:27486"
     logging:
       driver: "json-file"
     stop_grace_period: 2m
