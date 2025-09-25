@@ -3,8 +3,7 @@ services:
     hostname: verusd_vrsc
     container_name: verusd_vrsc
     image: verustrading/verusd:0.1
-      #command: verusd &
-    command: verusd -bootstrap &
+    command: verusd ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
       - ./data_dir:/root/.komodo/VRSC
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
