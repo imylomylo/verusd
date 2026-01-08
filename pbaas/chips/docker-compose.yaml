@@ -1,26 +1,20 @@
-version: '3.8'
 services:
-  verusdchips:
-    hostname: verusdchips
-    container_name: fafstakingverusdchips
+  verusd_chips:
+    hostname: ${VERUSD_HOSTNAME}
     image: verustrading/verusd:0.1
-    command: verusd -chain=chips
-    #command: verusd -chain=chips -bootstrap
+    command: verusd -chain=${CHAIN_NAME} ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
-      - ./data_dir:/root/.verus/pbaas/f315367528394674d45277e369629605a1c3ce9f
+      - ./data_dir:/root/.verus/pbaas/${CURRENCYID_HEX}
       #- ./VRSC.conf:/root/.komodo/VRSC/VRSC.conf
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
     networks:
-      fafstaking:
-        ipv4_address: ${VERUSDCHIPS_IPV4}
+      pbaas_network:
+        ipv4_address: ${VERUSD_IPV4}
     logging:
       driver: "json-file"
     stop_grace_period: 2m
 
 networks:
-  fafstaking:
-    ipam:
-      driver: default
-      config:
-        - subnet: ${DOCKER_FAFSTAKING_NETWORK_SUBNET}
-
+  pbaas_network:
+    name: ${DOCKER_NETWORK_NAME}
+    external: true

@@ -1,26 +1,21 @@
 services:
-  verusdvdex:
-    hostname: verusdvdex
-    container_name: fafstakingverusdvdex
+  verusd_vdex:
+    hostname: ${VERUSD_HOSTNAME}
     image: verustrading/verusd:0.1
-    #command: verusd -chain=vdex
-    command: verusd -chain=vdex -bootstrap
+    command: verusd -chain=${CHAIN_NAME} ${VERUSD_BOOTSTRAP_FLAG}
     volumes:
-      - ./data_dir:/root/.verus/pbaas/53fe39eea8c06bba32f1a4e20db67e5524f0309d
+      - ./data_dir:/root/.verus/pbaas/${CURRENCYID_HEX}
       #- ./VRSC.conf:/root/.komodo/VRSC/VRSC.conf
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
     networks:
-      chips_fafstaking:
-        ipv4_address: ${VERUSDVDEX_IPV4}
+      pbaas_network:
+        ipv4_address: ${VERUSD_IPV4}
     logging:
       driver: "json-file"
     stop_grace_period: 2m
 
 networks:
-  chips_fafstaking:
+  pbaas_network:
+    name: ${DOCKER_NETWORK_NAME}
     external: true
-#    ipam:
-#      driver: default
-#      config:
-#        - subnet: ${DOCKER_FAFSTAKING_NETWORK_SUBNET}
 
