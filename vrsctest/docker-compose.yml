@@ -1,24 +1,19 @@
 services:
   verusd:
     hostname: verusd_vrsctest
-    container_name: verusd_vrsctest
     image: verustrading/verusd:0.1
-    command: verusd -chain=vrsctest -testnet &
-    #command: verusd -chain=vrsctest -testnet -bootstrap &
+    command: verusd -chain=vrsctest -testnet ${VERUSD_BOOTSTRAP_FLAG} &
     volumes:
       - ./data_dir:/root/.komodo/vrsctest
       - /home/${USER}/.zcash-params:/root/.zcash-params:ro
     networks:
-      vrsctest_net:
+      dev10_vrsctest_net:
         ipv4_address: ${VERUSD_IPV4}
     logging:
       driver: "json-file"
     stop_grace_period: 2m
 
 networks:
-  vrsctest_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: ${DOCKER_VRSCTEST_NET_NETWORK_SUBNET}
-
+  dev10_vrsctest_net:
+    name: ${DOCKER_NETWORK_NAME}
+    external: true
