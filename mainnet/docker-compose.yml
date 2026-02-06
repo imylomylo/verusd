@@ -1,5 +1,5 @@
 services:
-  verusd:
+  vrsc:
     hostname: ${VERUSD_HOSTNAME}
     image: verustrading/verusd:0.1
     command: verusd ${VERUSD_BOOTSTRAP_FLAG}

@@ -1,1 +1,1 @@
-docker-compose exec -i -t verusd bash
+docker-compose exec -i -t vrsc bash
