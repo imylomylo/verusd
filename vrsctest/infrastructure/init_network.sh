@@ -1,13 +1,15 @@
 #!/bin/bash
 
 # 1. Load the .env file if it exists
-if [ -f .env ]; then
+CUSTOMENV=$1
+
+if [ -f $CUSTOMENV ]; then
     # Automatically export all variables in .env
     set -a
-    source .env
+    source $CUSTOMENV
     set +a
 else
-    echo "⚠️  Warning: .env file not found. Using script defaults."
+    echo "⚠️  Warning: $CUSTOMENV file not found. Using script defaults."
 fi
 
 # 2. Set variables (Use values from .env, or fallback to defaults)
@@ -15,7 +17,7 @@ fi
 NETWORK_NAME=${DOCKER_NETWORK_NAME:-my_default_network}
 SUBNET=${DOCKER_NETWORK_SUBNET:-172.99.0.0/16}
 DRIVER="bridge"
-
+BRIDGE_NAME="br-${BRIDGE_CUSTOM_NAME:-SP17209901}"
 # 3. Check and Create
 if docker network inspect "$NETWORK_NAME" >/dev/null 2>&1; then
     echo "✅ Network '$NETWORK_NAME' already exists."
@@ -25,6 +27,7 @@ else
     docker network create \
       --driver "$DRIVER" \
       --subnet "$SUBNET" \
+      -o com.docker.network.bridge.name="$BRIDGE_NAME" \
       "$NETWORK_NAME"
 
     if [ $? -eq 0 ]; then

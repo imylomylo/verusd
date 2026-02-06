@@ -1,8 +1,8 @@
 #!/bin/bash
-
+CUSTOMENV=$1
 # 1. Load .env
-if [ -f .env ]; then
-    set -a; source .env; set +a
+if [ -f $CUSTOMENV ]; then
+    set -a; source $CUSTOMENV; set +a
 fi
 
 # 2. Configuration
