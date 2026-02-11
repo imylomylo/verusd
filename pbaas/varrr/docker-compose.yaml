@@ -1,5 +1,5 @@
 services:
-  verusd_varrr:
+  varrr:
     hostname: ${VERUSD_HOSTNAME}
     image: verustrading/verusd:0.1
     command: verusd -chain=${CHAIN_NAME} ${VERUSD_BOOTSTRAP_FLAG}

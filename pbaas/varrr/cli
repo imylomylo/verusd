@@ -1,1 +1,1 @@
-docker-compose exec -i -t verusd_varrr bash
+docker-compose exec -i -t varrr bash
