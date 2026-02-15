@@ -1,1 +1,1 @@
-docker-compose exec -i -t verusd_vdex bash
+docker-compose exec -i -t vdex bash
